@@ -1,7 +1,8 @@
-import React from "react"
-import  ReactDOM  from 'react-dom'
-import 'normalize.css/normalize.css'
-import './styles/styles.scss'
+import React from "react";
+import  ReactDOM  from 'react-dom';
+import QuotifyApp from "./components/QuotifyApp";
+import 'normalize.css/normalize.css';
+import './styles/styles.scss';
 
-ReactDOM.render(<p>Boiler Plate</p>, document.getElementById('app'))
+ReactDOM.render(<QuotifyApp/>, document.getElementById('app'))
 
