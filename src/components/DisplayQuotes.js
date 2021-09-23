@@ -1,11 +1,18 @@
 import React from "react";
+import DisplayQuote from "./DisplayQuote";
 
-export default class DisplayQuotes extends React.Component { 
-    render () {
-       return (
-          <div>
-            <p>Quotes Will Be Displayed Here !!</p>
-          </div>
-        );
-    }
-}    
+const DisplayQuotes = (props) => (
+  <div>
+      <p>Quotes Will Be Displayed Below !!</p>
+      {
+        props.quotes.map((quote) => (
+          <DisplayQuote
+           key={quote._id}
+           content={quote.content}
+           author={quote.author}
+           />
+        ))
+      }
+    </div>
+);
+ export default DisplayQuotes;
