@@ -1,7 +1,7 @@
 import React from "react";
 
-const fetchByAuthor = async (author) => {
-    const response = await fetch(`https://quotable.io/quotes?author=${author}`)
+const fetchByAuthor = async (author,limit) => {
+    const response = await fetch(`https://quotable.io/quotes?author=${author}&limit=${limit}`)
     if(response.status === 200){
       const data = await response.json();
        return data.results
@@ -11,8 +11,8 @@ const fetchByAuthor = async (author) => {
   
 }
 
-const fetchByTags = async (tagsList) => {
-    const response = await fetch(`https://quotable.io/quotes?tags=${tagsList}`)
+const fetchByTags = async (tagsList,limit) => {
+    const response = await fetch(`https://quotable.io/quotes?tags=${tagsList}&limit=${limit}`)
     if(response.status === 200){
       const data = await response.json();
        return data.results
@@ -24,52 +24,66 @@ const fetchByTags = async (tagsList) => {
 
 export default class AdvanceFilters extends React.Component {
     state = {
-        filterby : undefined
+        filterby : undefined,
+        error : undefined
     };
     filterByAuthor = (e) => {
+       try{
         e.preventDefault();
         const author = (e.target.elements.author.value).trim();
         const limit = parseInt(((e.target.elements.limit.value).trim()),10);
-
-        fetchByAuthor(author).then((data) => {
-           const dataLenght = Object.keys(data).length;
-           if(limit <= dataLenght)
-            this.props. handleUpdateQuotes(data.slice(0,limit));
-           else{
+        if(author === "" || limit === "")
+        throw "Enter Valid Values"
+        fetchByAuthor(author,limit).then((data) => { 
             this.props. handleUpdateQuotes(data);
-           } 
+            this.setState(()=> ({error:undefined}))
             }).catch ((err) => {
             console.log(err)
           })
         e.target.elements.limit.value='';
         e.target.elements.author.value='';
+       }catch(err) {
+        this.setState(()=> ({error:err}))
+       }
     }
     filterByTags = (e) => {
+       try {
         e.preventDefault();
         let  arr = [];
+        let check = 0;
         const limit = parseInt(((e.target.elements.limit.value).trim()),10);
-        if((e.target.elements.wisdom).checked)
-        arr.push(e.target.elements.wisdom.value);
-        if((e.target.elements.technology).checked)
-        arr.push(e.target.elements.technology.value);
-        if((e.target.elements.inspirational).checked)
-        arr.push(e.target.elements.inspirational.value);
-        if((e.target.elements.famousquotes).checked)
-        arr.push(e.target.elements.famousquotes.value);
-        if((e.target.elements.friendship).checked)
-        arr.push(e.target.elements.friendship.value);
+        if((e.target.elements.wisdom).checked){
+          check=1;
+          arr.push("wisdom");
+        }
+        if((e.target.elements.technology).checked){
+          check=1;
+          arr.push("technology");
+        }
+        if((e.target.elements.inspirational).checked){
+          check=1;
+          arr.push("inspirational");
+        }
+        if((e.target.elements.famousquotes).checked){
+          check=1;
+          arr.push("famous-quotes");
+        }
+        if((e.target.elements.friendship).checked){
+          check=1;
+          arr.push("friendship");
+        }
         const tagsList = (arr.join(","));
-        console.log("joins heere",tagsList)
-        fetchByTags(tagsList).then((data) => {
-            const dataLenght = Object.keys(data).length;
-            if(limit <= dataLenght)
-             this.props. handleUpdateQuotes(data.slice(0,limit));
-            else{
-             this.props. handleUpdateQuotes(data);
-            } 
+        if((limit === "" || check === 0))
+        throw "Enter valid Values";
+        fetchByTags(tagsList,limit).then((data) => {
+         this.props. handleUpdateQuotes(data);
+         this.setState(()=> ({error:undefined}))
              }).catch ((err) => {
-             console.log(err)
+             
            })
+       }catch(err){
+          this.setState(()=> ({error:err}))
+       }
     }
     selectFilter = (e) => {
         e.preventDefault()
@@ -93,7 +107,8 @@ export default class AdvanceFilters extends React.Component {
                       (filterby === true) && (
                             <div>
                               <form onSubmit={this.filterByAuthor}>
-                               <input name="limit" type="text" placeholder="Limit"/>
+                                {this.state.error && <p>{this.state.error}</p>}
+                               <input name="limit" type="number" placeholder="Limit"/>
                                <input name="author" type="text" placeholder="Name"/>
                                <button>Submit</button>
                               </form>
@@ -104,7 +119,8 @@ export default class AdvanceFilters extends React.Component {
                      (filterby === false) && (
                           <div>
                               <form onSubmit={this.filterByTags}>
-                               <input name="limit" type="text" placeholder="Limit"/>
+                               {this.state.error && <p>{this.state.error}</p>}
+                               <input name="limit" type="number" placeholder="Limit"/>
                                <input name="wisdom" type="checkbox" value="wisdom"/><label>Wisdom</label>
                                <input name="technology" type="checkbox" value="technology"/><label>Technology</label>
                                <input name="inspirational" type="checkbox" value="inspirational"/><label>Inspirational</label>

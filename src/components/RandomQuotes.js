@@ -1,7 +1,7 @@
 import React from "react";
 
-const getRandomQuotes = async () => {
-    const response = await fetch('https://quotable.io/quotes?page=2')
+const getRandomQuotes = async (randomPage) => {
+    const response = await fetch(`https://quotable.io/quotes?page=${randomPage}&limit=6`)
     if(response.status === 200){
       const data = await response.json();
       return data.results
@@ -23,13 +23,15 @@ const getRandomAuthor = async () => {
 }
 
 export default class RandonQuotes extends React.Component {
-    randomQuotes = () => (
-        getRandomQuotes().then((data) => {
-            this.props. handleUpdateQuotes(data);
-            }).catch ((err) => {
-            console.log(err)
-          })
-    );
+   randomQuotes = () => {
+    const randomPage = Math.floor(Math.random() * 94);
+      getRandomQuotes(randomPage).then((data) => {
+          this.props. handleUpdateQuotes(data);
+          }).catch ((err) => {
+          console.log(err)
+        })
+  
+   }
     randomAuthors = () => (
         getRandomAuthor().then((data) => {
             this.props. handleUpdateQuotes(data);
@@ -42,7 +44,7 @@ export default class RandonQuotes extends React.Component {
             <div>
                 <span>
                     <button onClick={this.randomQuotes}>Generate Random Quotes</button>
-                    <button onClick={this.randomAuthors}>Generate Random Authors</button>
+                    <button onClick={this.randomQuotes}>Generate Random Authors</button>
                 </span>
             </div>
         );
