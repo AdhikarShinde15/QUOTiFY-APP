@@ -10,6 +10,7 @@ const DisplayQuotes = (props) => (
            key={quote._id}
            content={quote.content}
            author={quote.author}
+           tag={quote.tags[0]}
            />
         ))
       }
