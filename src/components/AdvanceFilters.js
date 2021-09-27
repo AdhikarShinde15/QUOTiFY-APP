@@ -1,6 +1,6 @@
 import React from "react";
 
-const fetchByAuthor = async (author,limit) => {
+const fetchByAuthor = async (author,limit = 6) => {
     const response = await fetch(`https://quotable.io/quotes?author=${author}&limit=${limit}`)
     if(response.status === 200){
       const data = await response.json();
@@ -24,7 +24,7 @@ const fetchByTags = async (tagsList,limit) => {
 
 export default class AdvanceFilters extends React.Component {
     state = {
-        filterby : undefined,
+        filterby : true,
         error : undefined
     };
     filterByAuthor = (e) => {
@@ -32,7 +32,7 @@ export default class AdvanceFilters extends React.Component {
         e.preventDefault();
         const author = (e.target.elements.author.value).trim();
         const limit = parseInt(((e.target.elements.limit.value).trim()),10);
-        if(author === "" || limit === "")
+        if(author === "" || isNaN(limit))
         throw "Enter Valid Values"
         fetchByAuthor(author,limit).then((data) => { 
             this.props. handleUpdateQuotes(data);
@@ -98,8 +98,7 @@ export default class AdvanceFilters extends React.Component {
         return (
             <div>
                 <h3>Advance Filters</h3>
-                    <select onChange={this.selectFilter}>
-                      <option value={undefined}>Select Filter</option>  
+                    <select onChange={this.selectFilter}>  
                       <option value="author">Author</option>
                       <option value="quotes">Quotes</option>
                     </select>

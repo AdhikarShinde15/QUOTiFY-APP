@@ -2,6 +2,7 @@ import React from "react";
 import AdvanceFilters from "./AdvanceFilters";
 import RandonQuotes from "./RandomQuotes";
 import DisplayQuotes from "./DisplayQuotes";
+import DisplayAuthors from "./DisplayAuthors";
 
 const getQuotes = async (randomPage) => {
   const response = await fetch(`https://api.quotable.io/quotes?page=${randomPage}&limit=6`)
@@ -13,13 +14,19 @@ const getQuotes = async (randomPage) => {
   }
 
 }
-export default class QuotifyApp extends React.Component {
-    state = {
-        quotes : []
+let showHide = true ;
+export default class QuotifyApp extends React.Component { 
+   state = {
+        quotes : [],
+        authors : []
      }
      handleUpdateQuotes = (data) => {
-      //  console.log(data)
+       showHide = true;
         this.setState(() => ({quotes:data}))
+     }
+     handleUpdateAuthors = (data) => {
+       showHide = false;
+       this.setState(() => ({authors:data}))
      }
     render () {
       console.log("render ran")
@@ -29,11 +36,18 @@ export default class QuotifyApp extends React.Component {
                  <AdvanceFilters handleUpdateQuotes={this.handleUpdateQuotes} />
                  <RandonQuotes
                  handleUpdateQuotes={this.handleUpdateQuotes}
+                 handleUpdateAuthors={this.handleUpdateAuthors}
                  />
+                { showHide && 
                  <DisplayQuotes 
                  quotes={this.state.quotes}
                  />
-                  
+                }
+                 { !(showHide) &&
+                   <DisplayAuthors
+                   authors={this.state.authors}
+                 /> 
+                 }
             </div>
         );
     }   
