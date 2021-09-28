@@ -52,6 +52,7 @@ export default class AdvanceFilters extends React.Component {
         let  arr = [];
         let check = 0;
         const limit = parseInt(((e.target.elements.limit.value).trim()),10);
+        
         if((e.target.elements.wisdom).checked){
           check=1;
           arr.push("wisdom");
@@ -97,37 +98,38 @@ export default class AdvanceFilters extends React.Component {
         const {filterby} = this.state
         return (
             <div>
-                <h3>Advance Filters</h3>
-                    <select onChange={this.selectFilter}>  
+               <h3>Advance Filters</h3>
+               {this.state.error && <p>{this.state.error}</p>}
+                    <select className="select-items" onChange={this.selectFilter}>  
                       <option value="author">Author</option>
                       <option value="quotes">Quotes</option>
                     </select>
                      {
                       (filterby === true) && (
-                            <div>
-                              <form onSubmit={this.filterByAuthor}>
-                                {this.state.error && <p>{this.state.error}</p>}
-                               <input name="limit" type="number" placeholder="Limit"/>
-                               <input name="author" type="text" placeholder="Name"/>
-                               <button>Submit</button>
-                              </form>
-                            </div>
+                              <div className="author-main">
+                                <form id="author-id" className="author-form" onSubmit={this.filterByAuthor}>
+                                 <input className="author-input-box1" name="limit" type="number" placeholder="Limit"/>
+                                 <input className="author-input-box2" name="author" type="text" placeholder="Name"/>
+                               </form>
+                              <button className="all-btn" form="author-id">Submit</button>
+                              </div>
                       )
                      }
                     {
                      (filterby === false) && (
-                          <div>
-                              <form onSubmit={this.filterByTags}>
-                               {this.state.error && <p>{this.state.error}</p>}
-                               <input name="limit" type="number" placeholder="Limit"/>
-                               <input name="wisdom" type="checkbox" value="wisdom"/><label>Wisdom</label>
-                               <input name="technology" type="checkbox" value="technology"/><label>Technology</label>
-                               <input name="inspirational" type="checkbox" value="inspirational"/><label>Inspirational</label>
-                               <input name="famousquotes" type="checkbox" value="famous-quotes"/><label>Famous-Quotes</label>
-                               <input name="friendship" type="checkbox" value="friendship"/><label>Friendship </label>
-                               <button>Submit</button>
-                              </form>
-                         </div>
+                             <div>
+                              <input form="quotes-id"  className="input-limit-quotes" name="limit" type="number" placeholder="Limit"/>
+                                <div className="quotes-main">
+                                <form id="quotes-id" className="quotes-form" onSubmit={this.filterByTags}>
+                                 <label><input name="wisdom" type="checkbox" value="wisdom"/> Wisdom</label>
+                                 <label><input name="technology" type="checkbox" value="technology"/> Technology</label>
+                                 <label><input name="inspirational" type="checkbox" value="inspirational"/> Inspirational</label>
+                                 <label> <input name="famousquotes" type="checkbox" value="famous-quotes"/> Famous-Quotes</label>
+                                 <label><input name="friendship" type="checkbox" value="friendship"/> Friendship </label> 
+                               </form>
+                               <button className="all-btn" form="quotes-id">Submit</button>
+                              </div>
+                             </div>
                         )
                      }
             </div>

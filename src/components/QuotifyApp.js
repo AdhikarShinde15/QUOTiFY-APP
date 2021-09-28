@@ -14,40 +14,51 @@ const getQuotes = async (randomPage) => {
   }
 
 }
-let showHide = true ;
+
 export default class QuotifyApp extends React.Component { 
+
    state = {
         quotes : [],
-        authors : []
+        authors : [],
+        showHide : false
      }
      handleUpdateQuotes = (data) => {
-       showHide = true;
-        this.setState(() => ({quotes:data}))
+       const {showHide} = this.state
+      if(showHide)
+        this.setState(() => ({showHide:!showHide,quotes:data}))
+      else
+        this.setState(() => ({showHide:showHide,quotes:data}))  
      }
      handleUpdateAuthors = (data) => {
-       showHide = false;
-       this.setState(() => ({authors:data}))
+      const {showHide} = this.state
+      if(showHide)
+      this.setState(() => ({showHide:showHide,authors:data}))
+      else
+      this.setState(() => ({showHide:!showHide,authors:data}))
      }
     render () {
-      console.log("render ran")
         return (
             <div>
-                <h1>Quotify App</h1>
-                 <AdvanceFilters handleUpdateQuotes={this.handleUpdateQuotes} />
+               <h1 className="header"><i className="fas fa-quote-right"></i>  Quotify App</h1>
+               <div className="container">
+                 <div className="advance">
+                   <AdvanceFilters handleUpdateQuotes={this.handleUpdateQuotes} />
+                 </div>
                  <RandonQuotes
-                 handleUpdateQuotes={this.handleUpdateQuotes}
-                 handleUpdateAuthors={this.handleUpdateAuthors}
+                    handleUpdateQuotes={this.handleUpdateQuotes}
+                    handleUpdateAuthors={this.handleUpdateAuthors}
                  />
-                { showHide && 
+                { !(this.state.showHide) && 
                  <DisplayQuotes 
                  quotes={this.state.quotes}
                  />
                 }
-                 { !(showHide) &&
+                 { (this.state.showHide) &&
                    <DisplayAuthors
                    authors={this.state.authors}
                  /> 
                  }
+            </div>
             </div>
         );
     }   

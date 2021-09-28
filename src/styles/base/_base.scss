@@ -1,9 +1,12 @@
+*{
+  font-family: 'Montserrat';
+}
 html {
   font-size: 62.5%;
 }
 
 body {
-    font-family: Helvetica, sans-serif, Arial;
+    font-family: 'Montserrat';
     font-size: $m-size;
    
 }
@@ -12,6 +15,3 @@ button {
   cursor: pointer;
 }
 
-button:disabled {
-  cursor: default;
-}

@@ -1,0 +1,65 @@
+.advance {
+    border-left: 3px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    box-shadow: -5px 10px 12px 4px #d9d0d0;
+    padding: .8rem;
+}
+
+//For Author
+.author-form {
+    display: inline-flex;
+}
+
+.select-items {
+    padding: 0.1rem;
+    width: 17rem;
+    font-family:  'Montserrat';
+    float: left;
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+.author-input-box1 {
+    margin-left: 1rem;
+    width: 21rem;
+    font-family:  'Montserrat';
+}
+
+.author-input-box2 {
+    margin-left: 4rem;
+    width: 25rem;
+    font-family:  'Montserrat';
+}
+
+.all-btn {
+    display: block;
+    border: none;
+    width: -webkit-fill-available;
+    height: 2.7rem;
+    margin: 1rem;
+    margin-left: 65rem;
+    background-color: #00e485;
+    color: white;
+    font-family:  'Montserrat';
+}
+
+.author-main {
+    display: inline;
+}
+
+//For Quotes
+.quotes-form{
+    border: 1px solid #c4c4c4;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bold;
+}
+
+.input-limit-quotes{
+    margin-left: 2rem;;
+}
+
+[type="checkbox"], [type="radio"] {
+    margin-top: 0.3rem;
+}
