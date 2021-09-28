@@ -42,11 +42,11 @@ export default class RandonQuotes extends React.Component {
     }
     render () {
         return (
-            <div>
-                <span>
-                    <button onClick={this.randomQuotes}>Generate Random Quotes</button>
-                    <button onClick={this.randomAuthors}>Generate Random Authors</button>
-                </span>
+            <div className="random-QA">
+                
+                    <button className="btn" onClick={this.randomQuotes}><i className="fas fa-random "></i> Generate Random Quotes</button>
+                    <button className="btn" onClick={this.randomAuthors}><i className="fas fa-random"></i> Generate Random Authors</button>
+                
             </div>
         );
     }
