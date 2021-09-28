@@ -1,7 +1,7 @@
 import React from "react";
 
 const getRandomQuotes = async (randomPage) => {
-    const response = await fetch(`https://quotable.io/quotes?page=${randomPage}&limit=6`)
+    const response = await fetch(`https://quotable.io/quotes?page=${randomPage}&limit=9`)
     if(response.status === 200){
       const data = await response.json();
       return data.results

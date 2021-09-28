@@ -2,8 +2,7 @@ import React from "react";
 import DisplayQuote from "./DisplayQuote";
 
 const DisplayQuotes = (props) => (
-  <div>
-      <p>Quotes Will Be Displayed Below !!</p>
+  <div className="grid">
       {
         props.quotes.map((quote) => (
           <DisplayQuote

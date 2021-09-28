@@ -5,7 +5,7 @@ import DisplayQuotes from "./DisplayQuotes";
 import DisplayAuthors from "./DisplayAuthors";
 
 const getQuotes = async (randomPage) => {
-  const response = await fetch(`https://api.quotable.io/quotes?page=${randomPage}&limit=6`)
+  const response = await fetch(`https://api.quotable.io/quotes?page=${randomPage}&limit=9`)
   if(response.status === 200){
     const data = await response.json();
     return data.results
@@ -39,6 +39,7 @@ export default class QuotifyApp extends React.Component {
     render () {
         return (
             <div>
+              {/* <img src="./quotation-mark.png"/> */}
                <h1 className="header"><i className="fas fa-quote-right"></i>  Quotify App</h1>
                <div className="container">
                  <div className="advance">

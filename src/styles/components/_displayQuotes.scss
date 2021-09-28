@@ -1,0 +1,37 @@
+.grid{
+    display: grid;
+    column-gap: 1.5em;
+    grid-template-columns: repeat(3, 1fr);
+    height:max-content;
+    margin-top: 2rem;
+}
+
+.box{
+    box-shadow: 6px -2px 21px 0px #d9d0d0;
+    height: min-content;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    // clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+}
+
+.tag{
+    display: flex;
+    justify-content: right;
+    margin-right: 2rem;
+    font-weight: bolder;
+    font-size: 1.7rem;
+}
+
+.content {
+    display: flex;
+    margin-left: 7rem;
+    width: 53%;
+}
+
+.name {
+    display: flex;
+    justify-content: right;
+    margin-right: 1rem;
+}

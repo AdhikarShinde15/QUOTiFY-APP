@@ -3,3 +3,13 @@
     font-style: bold;
     margin-left: 15rem;
 }
+
+.fa-quote-right:before {
+    content: "\f10e";
+    border-radius: 1px red;
+    border: 1px solid #ff145b;
+    padding: 1rem;
+    background: #ff145b;
+    border-radius: 3rem;
+    color: white;
+}
