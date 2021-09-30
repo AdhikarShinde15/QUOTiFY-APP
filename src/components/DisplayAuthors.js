@@ -2,8 +2,7 @@ import React from "react";
 import DisplayAuthor from "./DisplayAuthor";
 
 const DisplayAuthors = (props) => (
-    <div>
-        <p>Authors Will be Displayed Below - - </p>
+    <div className="grid-author">
         {
         props.authors.map((author) => (
           <DisplayAuthor

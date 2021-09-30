@@ -1,5 +1,4 @@
-.grid{
-    // position: relative;
+.grid-author{
     display: grid;
     column-gap: 1.5em;
     grid-template-columns: repeat(3, 1fr);
@@ -7,9 +6,9 @@
     margin-top: 2rem;
 }
 
-.box{
+.box-author{
     position: relative;
-    box-shadow:  6px -2px 21px 0px rgb(150, 148, 148);
+    box-shadow: 6px -2px 21px 0px #777;
     height: min-content;
     margin-top: 2rem;
     display: flex;
@@ -17,7 +16,7 @@
     text-align: center;
     z-index: 0;
 }
-.box::before {
+.box-author::before {
     height: 68%;
     width: 100%;
     content: "";
@@ -29,15 +28,14 @@
     
 }
 
-.box:nth-child(odd)::before {
+.box-author:nth-child(odd)::before {
     background: #82abfa;
 }
-.box:nth-child(even)::before {
+.box-author:nth-child(even)::before {
     background-color: #eb5a6e;
 }
    
-
-.tag{
+.name-author{
     display: flex;
     justify-content: right;
     margin-right: 2rem;
@@ -45,14 +43,13 @@
     font-size: 1.7rem;
 }
 
-.content {
-    display: flex;
+.bio {
+    // display: flex;
     margin-left: 7rem;
-    width: 53%;
+    width: 63%;
 }
 
-.name {
-    display: flex;
-    justify-content: right;
-    margin-right: 1rem;
+.link {
+    text-decoration: none;
+    color: black;
 }

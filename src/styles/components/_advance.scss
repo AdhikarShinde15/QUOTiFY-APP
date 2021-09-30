@@ -54,10 +54,15 @@ input[type=number]::-webkit-inner-spin-button {
     display: flex;
     justify-content: space-evenly;
     font-weight: bold;
+    align-items: center;
+    height: 3rem;
 }
 
 .input-limit-quotes{
-    margin-left: 2rem;;
+    margin-left: 2rem;
+    height: 1.8rem;
+    font-family:  'Montserrat';
+
 }
 
 [type="checkbox"], [type="radio"] {
