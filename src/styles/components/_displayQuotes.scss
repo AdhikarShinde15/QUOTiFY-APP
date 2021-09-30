@@ -1,4 +1,5 @@
 .grid{
+    // position: relative;
     display: grid;
     column-gap: 1.5em;
     grid-template-columns: repeat(3, 1fr);
@@ -7,14 +8,38 @@
 }
 
 .box{
+    position: relative;
     box-shadow: 6px -2px 21px 0px #d9d0d0;
     height: min-content;
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     text-align: center;
-    // clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    z-index: 0;
 }
+.box::before {
+    height: 68%;
+    width: 100%;
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    background: #82abfa;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 63%);
+    
+}
+
+// .box::after {
+//     // height: 50%;
+//     // width: 100%;
+//     // content: "";
+//     // position: absolute;
+//     // top: 0;
+//     // z-index: -1;
+//     // clip-path: polygon(0 0, 100% 0, 100% 100%, 0 29%);
+//     background: red;
+    
+// }
 
 .tag{
     display: flex;
