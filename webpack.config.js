@@ -1,6 +1,8 @@
 const path = require ('path');
 
-module.exports = {
+module.exports = (env) => {
+const isProduction = env === 'production';
+ return {
     entry:['babel-polyfill','./src/app.js'],
     output:{
         path:path.join(__dirname, 'public'),
@@ -16,8 +18,9 @@ module.exports = {
           use:['style-loader','css-loader','sass-loader'] 
        }]
    },
-   devtool: 'cheap-module-eval-source-map',
+   devtool: isProduction ? 'source-map':'cheap-module-eval-source-map',
    devServer: {
-       contentBase:"./build"
+       contentBase:path.join(__dirname, 'public')
    }
 }; 
+};
